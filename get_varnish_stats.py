@@ -6,6 +6,7 @@
 
 import sys
 import getopt
+import socket
 import telnetlib
 import re
 
@@ -39,9 +40,12 @@ def get_stats(host, port):
     stats = {}
     
     telnet = telnetlib.Telnet()
-    telnet.open(host, port)
-    telnet.write('stats\r\n')
-
+    try:
+        telnet.open(host, port)
+        telnet.write('stats\r\n')
+    except socket.error as (errno, strerror):
+        print "Unable to conntect: " + strerror
+        sys.exit(3)
     out = telnet.read_until("N duplicate purges", 10)
     
     telnet.write('quit\r\n')

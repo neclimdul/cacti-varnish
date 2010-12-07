@@ -81,13 +81,13 @@ def get_stats(host, port):
     #
     # pulling out the backend info
     #
-    backend_conn = re.search("\d+  Backend conn. success", out).group(0).split()[0]
-    backend_unhealthy = re.search("\d+  Backend conn. not attempted", out).group(0).split()[0]
-    backend_busy = re.search("\d+  Backend conn. too many", out).group(0).split()[0]
-    backend_fail = re.search("\d+  Backend conn. failures", out).group(0).split()[0]
-    backend_reuse = re.search("\d+  Backend conn. reuses", out).group(0).split()[0]
-    backend_recycle = re.search("\d+  Backend conn. recycles", out).group(0).split()[0]
-    backend_unused = re.search("\d+  Backend conn. unused", out).group(0).split()[0]
+    backend_conn = re.search("\d+  Backend connections success", out).group(0).split()[0]
+    backend_unhealthy = re.search("\d+  Backend connections not attempted", out).group(0).split()[0]
+    backend_busy = re.search("\d+  Backend connections too many", out).group(0).split()[0]
+    backend_fail = re.search("\d+  Backend connections failures", out).group(0).split()[0]
+    backend_reuse = re.search("\d+  Backend connections reuses", out).group(0).split()[0]
+    backend_recycle = re.search("\d+  Backend connections recycles", out).group(0).split()[0]
+    backend_unused = re.search("\d+  Backend connections unused", out).group(0).split()[0]
     backend_req = int(backend_conn) + int(backend_unhealthy) + int(backend_busy) + int(backend_fail) + int(backend_reuse) + int(backend_recycle) + int(backend_unused) 
     
     stats['backend_conn'] = backend_conn
